@@ -17,6 +17,9 @@ Get All Bookings IDs:
   FIRSTNAME: Anthony
   LASTNAME: ODonnell
 
+Get Usersss:
+  name: ererer
+
 Add New Booking:
   PathAuth: auth
   PathAddBooking: booking
