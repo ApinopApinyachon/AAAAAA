@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.12.4 on win32)" generated="20240811 20:38:49.970" rpa="false" schemaversion="4">
+<suite id="s1" name="Lab06" source="c:\Software Testing\Lab06\TestCases\Lab06.robot">
+<kw name="Ping Server" library="common" type="SETUP">
+<kw name="Log" library="BuiltIn">
+<arg>${BASE_URL.${SITE}}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240811 20:38:50.714" level="INFO">https://restful-booker.herokuapp.com/</msg>
+<status status="PASS" starttime="20240811 20:38:50.713" endtime="20240811 20:38:50.716"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>SessionPing</arg>
+<arg>${BASE_URL.${SITE}}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20240811 20:38:50.717" level="INFO">Creating Session using : alias=SessionPing, url=https://restful-booker.herokuapp.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20240811 20:38:50.716" endtime="20240811 20:38:50.718"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>SessionPing</arg>
+<arg>ping</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20240811 20:38:52.107" level="INFO">GET Request : url=https://restful-booker.herokuapp.com/ping 
+ path_url=/ping 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20240811 20:38:52.107" level="INFO">GET Response : url=https://restful-booker.herokuapp.com/ping 
+ status=201, reason=Created 
+ headers={'Server': 'Cowboy', 'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1723383532&amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;s=8RJGiRYhaQTGNgzOVwUNI%2FNjo0Ha3tRi%2F5RMh2bJlSc%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1723383532&amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;s=8RJGiRYhaQTGNgzOVwUNI%2FNjo0Ha3tRi%2F5RMh2bJlSc%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Content-Type': 'text/plain; charset=utf-8', 'Content-Length': '7', 'Etag': 'W/"7-rM9AyJuqT6iOan/xHh+AW+7K/T8"', 'Date': 'Sun, 11 Aug 2024 13:38:52 GMT', 'Via': '1.1 vegur'} 
+ body=Created 
+ </msg>
+<msg timestamp="20240811 20:38:52.107" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20240811 20:38:50.718" endtime="20240811 20:38:52.107"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20240811 20:38:52.108" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20240811 20:38:52.108" endtime="20240811 20:38:52.108"/>
+</kw>
+<status status="PASS" starttime="20240811 20:38:50.712" endtime="20240811 20:38:52.108"/>
+</kw>
+<test id="s1-t1" name="UpdateUsers" line="15">
+<kw name="Update User" library="common">
+<msg timestamp="20240811 20:38:52.110" level="FAIL">Resolving argument default values failed: Variable '${UID}' not found.</msg>
+<status status="FAIL" starttime="20240811 20:38:52.109" endtime="20240811 20:38:52.111"/>
+</kw>
+<tag>Put</tag>
+<status status="FAIL" starttime="20240811 20:38:52.108" endtime="20240811 20:38:52.111">Resolving argument default values failed: Variable '${UID}' not found.</status>
+</test>
+<status status="FAIL" starttime="20240811 20:38:49.977" endtime="20240811 20:38:52.112"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">Put</stat>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Lab06">Lab06</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

@@ -1,0 +1,9 @@
+SITE: IOT
+
+BASE_URL:
+  IOT: https://restful-booker.herokuapp.com/
+  STG: https://restful-booker.herokuapp.com/
+
+BASE_URL2:
+  IOT: https://reqres.in/api/users
+  STG: https://reqres.in/api/users

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.12.4 on win32)" generated="20240811 21:17:08.538" rpa="false" schemaversion="4">
+<suite id="s1" name="Lab06" source="C:\Software Testing\Lab06\TestCases\Lab06.robot">
+<kw name="Ping Server" library="common" type="SETUP">
+<kw name="Log" library="BuiltIn">
+<arg>${BASE_URL.${SITE}}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240811 21:17:09.158" level="INFO">https://restful-booker.herokuapp.com/</msg>
+<status status="PASS" starttime="20240811 21:17:09.157" endtime="20240811 21:17:09.158"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>SessionPing</arg>
+<arg>${BASE_URL.${SITE}}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20240811 21:17:09.158" level="INFO">Creating Session using : alias=SessionPing, url=https://restful-booker.herokuapp.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20240811 21:17:09.158" endtime="20240811 21:17:09.158"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>SessionPing</arg>
+<arg>ping</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20240811 21:17:10.540" level="INFO">GET Request : url=https://restful-booker.herokuapp.com/ping 
+ path_url=/ping 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20240811 21:17:10.540" level="INFO">GET Response : url=https://restful-booker.herokuapp.com/ping 
+ status=201, reason=Created 
+ headers={'Server': 'Cowboy', 'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1723385830&amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;s=3%2FJN6M1OXmlAX%2BGZuXgteiGu%2FUpALkvpy5NTtSmLNiY%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1723385830&amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;s=3%2FJN6M1OXmlAX%2BGZuXgteiGu%2FUpALkvpy5NTtSmLNiY%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Content-Type': 'text/plain; charset=utf-8', 'Content-Length': '7', 'Etag': 'W/"7-rM9AyJuqT6iOan/xHh+AW+7K/T8"', 'Date': 'Sun, 11 Aug 2024 14:17:10 GMT', 'Via': '1.1 vegur'} 
+ body=Created 
+ </msg>
+<msg timestamp="20240811 21:17:10.540" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20240811 21:17:09.158" endtime="20240811 21:17:10.540"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20240811 21:17:10.540" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20240811 21:17:10.540" endtime="20240811 21:17:10.540"/>
+</kw>
+<status status="PASS" starttime="20240811 21:17:09.157" endtime="20240811 21:17:10.540"/>
+</kw>
+<test id="s1-t1" name="AddUsers" line="7">
+<kw name="AddUsers" library="common">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${HEADERS}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240811 21:17:10.542" level="INFO">${HEADERS} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20240811 21:17:10.541" endtime="20240811 21:17:10.542"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${data}</var>
+<arg>name=${${TEST NAME}.name}</arg>
+<arg>job=${${TEST NAME}.job}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240811 21:17:10.543" level="INFO">${data} = {'name': 'test', 'job': 'team leader'}</msg>
+<status status="PASS" starttime="20240811 21:17:10.542" endtime="20240811 21:17:10.543"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>AddUsers</arg>
+<arg>${BASE_URL2.${SITE}}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20240811 21:17:10.543" level="INFO">Creating Session using : alias=AddUsers, url=https://reqres.in/api/users, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20240811 21:17:10.543" endtime="20240811 21:17:10.544"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>AddUsers</arg>
+<arg>${BASE_URL2.${SITE}}</arg>
+<arg>data=${data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20240811 21:17:11.143" level="INFO">POST Request : url=https://reqres.in/api/users 
+ path_url=/api/users 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '25', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=name=test&amp;job=team+leader 
+ </msg>
+<msg timestamp="20240811 21:17:11.143" level="INFO">POST Response : url=https://reqres.in/api/users 
+ status=201, reason=Created 
+ headers={'Date': 'Sun, 11 Aug 2024 14:17:11 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '85', 'Connection': 'keep-alive', 'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1723385831&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=ZzoP4KfQ%2BGZGshaiwztGvLbSzcR%2BRsLdgzgJk5b%2B8Lg%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1723385831&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=ZzoP4KfQ%2BGZGshaiwztGvLbSzcR%2BRsLdgzgJk5b%2B8Lg%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"55-6WCL74Px8vuebf3iCGQpWFH5R+k"', 'Via': '1.1 vegur', 'CF-Cache-Status': 'DYNAMIC', 'Server': 'cloudflare', 'CF-RAY': '8b18d9035e9f37d6-BKK'} 
+ body={"name":"test","job":"team leader","id":"677","createdAt":"2024-08-11T14:17:11.307Z"} 
+ </msg>
+<msg timestamp="20240811 21:17:11.143" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20240811 21:17:10.544" endtime="20240811 21:17:11.143"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>201</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20240811 21:17:11.143" endtime="20240811 21:17:11.143"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240811 21:17:11.144" level="INFO">{'name': 'test', 'job': 'team leader', 'id': '677', 'createdAt': '2024-08-11T14:17:11.307Z'}</msg>
+<status status="PASS" starttime="20240811 21:17:11.143" endtime="20240811 21:17:11.144"/>
+</kw>
+<kw name="Select Elements" library="JsonValidator">
+<var>${new_user_id}</var>
+<arg>${response.json()}</arg>
+<arg>.id</arg>
+<doc>Return list of elements from _json_source_, matching [ http://jsonselect.org/ | JSONSelect] expression.</doc>
+<msg timestamp="20240811 21:17:11.145" level="INFO">${new_user_id} = ['677']</msg>
+<status status="PASS" starttime="20240811 21:17:11.144" endtime="20240811 21:17:11.145"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${UID}</arg>
+<arg>${new_user_id}[0]</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20240811 21:17:11.145" level="INFO">${UID} = 677</msg>
+<status status="PASS" starttime="20240811 21:17:11.145" endtime="20240811 21:17:11.145"/>
+</kw>
+<status status="PASS" starttime="20240811 21:17:10.541" endtime="20240811 21:17:11.145"/>
+</kw>
+<tag>Post</tag>
+<status status="PASS" starttime="20240811 21:17:10.540" endtime="20240811 21:17:11.146"/>
+</test>
+<test id="s1-t2" name="UpdateUsers" line="11">
+<kw name="UpdateUsers" library="common">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${HEADERS}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240811 21:17:11.147" level="INFO">${HEADERS} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20240811 21:17:11.147" endtime="20240811 21:17:11.147"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${data}</var>
+<arg>name=${${TEST NAME}.name}</arg>
+<arg>job=${${TEST NAME}.job}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240811 21:17:11.148" level="INFO">${data} = {'name': 'update_test', 'job': 'resident'}</msg>
+<status status="PASS" starttime="20240811 21:17:11.147" endtime="20240811 21:17:11.148"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>UpdateUsers</arg>
+<arg>${BASE_URL2.${SITE}}</arg>
+<arg>headers=${HEADERS}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20240811 21:17:11.148" level="INFO">Creating Session using : alias=UpdateUsers, url=https://reqres.in/api/users, headers={'Content-Type': 'application/json'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20240811 21:17:11.148" endtime="20240811 21:17:11.148"/>
+</kw>
+<kw name="PUT On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>UpdateUsers</arg>
+<arg>${BASE_URL2.${SITE}}/users/${ID}</arg>
+<arg>json=${data}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<msg timestamp="20240811 21:17:11.769" level="INFO">PUT Request : url=https://reqres.in/api/users/users/677 
+ path_url=/api/users/users/677 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '42'} 
+ body=b'{"name": "update_test", "job": "resident"}' 
+ </msg>
+<msg timestamp="20240811 21:17:11.769" level="INFO">PUT Response : url=https://reqres.in/api/users/users/677 
+ status=200, reason=OK 
+ headers={'Date': 'Sun, 11 Aug 2024 14:17:12 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1723385831&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=ZzoP4KfQ%2BGZGshaiwztGvLbSzcR%2BRsLdgzgJk5b%2B8Lg%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1723385831&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=ZzoP4KfQ%2BGZGshaiwztGvLbSzcR%2BRsLdgzgJk5b%2B8Lg%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"4e-dZHMHDyvoXU9dIpCd3cCmruNPzk"', 'Via': '1.1 vegur', 'CF-Cache-Status': 'DYNAMIC', 'Vary': 'Accept-Encoding', 'Server': 'cloudflare', 'CF-RAY': '8b18d9075d61ee62-BKK', 'Content-Encoding': 'gzip'} 
+ body={"name":"update_test","job":"resident","updatedAt":"2024-08-11T14:17:11.949Z"} 
+ </msg>
+<msg timestamp="20240811 21:17:11.769" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240811 21:17:11.148" endtime="20240811 21:17:11.769"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20240811 21:17:11.769" endtime="20240811 21:17:11.769"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240811 21:17:11.770" level="INFO">{'name': 'update_test', 'job': 'resident', 'updatedAt': '2024-08-11T14:17:11.949Z'}</msg>
+<status status="PASS" starttime="20240811 21:17:11.769" endtime="20240811 21:17:11.770"/>
+</kw>
+<status status="PASS" starttime="20240811 21:17:11.147" endtime="20240811 21:17:11.770"/>
+</kw>
+<tag>Put</tag>
+<status status="PASS" starttime="20240811 21:17:11.146" endtime="20240811 21:17:11.770"/>
+</test>
+<status status="PASS" starttime="20240811 21:17:08.539" endtime="20240811 21:17:11.771"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">Post</stat>
+<stat pass="1" fail="0" skip="0">Put</stat>
+</tag>
+<suite>
+<stat pass="2" fail="0" skip="0" id="s1" name="Lab06">Lab06</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
